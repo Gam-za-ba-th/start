@@ -1,3 +1,9 @@
+/*
+CrosswordPuzzle
+https://github.com/hencoappel/CrosswordPuzzle/tree/master/src/crossword
+Copyright 2013 Henco Appel / ì˜ë¬¸ í•œê¸€í™”, ë‹¨ì–´ì˜ ë¬¸ì ì¹¸ìˆ˜ì— ë”°ë¥¸ ì ìˆ˜í‘œê¸°, ì‹­ìë§í’€ì´ ìˆœì„œë³€ê²½, ì‹­ìë§í’€ì´ ê²Œì„ ì¡°ì‘ë²• ì„¤ëª…
+*/
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
@@ -62,7 +68,7 @@ public class PuzzleGUI extends JFrame {
 	private Thread input;
 
 	public PuzzleGUI() {
-		super("½ÊÀÚ¸»Ç®ÀÌ(¿µ¾î ´Ü¾î ¸ÂÃß±â)");
+		super("ì‹­ìë§í’€ì´(ì˜ì–´ ë‹¨ì–´ ë§ì¶”ê¸°)");
 		initGUI();
 	}
 
@@ -119,11 +125,11 @@ public class PuzzleGUI extends JFrame {
 		cluePanel.setPreferredSize(new Dimension(220, 200));
 
 		JPanel acrossCluesPanel = new JPanel(new BorderLayout());
-		acrossCluesPanel.add(new JLabel("°¡·ÎÁÙÈùÆ®", SwingConstants.CENTER), BorderLayout.NORTH);
+		acrossCluesPanel.add(new JLabel("ê°€ë¡œì¤„íŒíŠ¸", SwingConstants.CENTER), BorderLayout.NORTH);
 		acrossCluesPanel.add(new JScrollPane(acrossJList), BorderLayout.CENTER);
 
 		JPanel downCluesPanel = new JPanel(new BorderLayout());
-		downCluesPanel.add(new JLabel("¼¼·ÎÁÙÈùÆ®", SwingConstants.CENTER), BorderLayout.NORTH);
+		downCluesPanel.add(new JLabel("ì„¸ë¡œì¤„íŒíŠ¸", SwingConstants.CENTER), BorderLayout.NORTH);
 		downCluesPanel.add(new JScrollPane(downJList), BorderLayout.CENTER);
 
 		cluePanel.add(acrossCluesPanel);
@@ -134,7 +140,7 @@ public class PuzzleGUI extends JFrame {
 		JPanel textPanel = new JPanel(new BorderLayout());
 
 		JPanel chatPanel = new JPanel();
-		chatPanel.add(new JLabel("Ã¤ÆÃ:"));
+		chatPanel.add(new JLabel("ì±„íŒ…:"));
 		final JTextField chatField = new JTextField(30);
 		chatField.addKeyListener(new KeyAdapter() {
 
@@ -142,11 +148,11 @@ public class PuzzleGUI extends JFrame {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					if (out != null)
-						out.println("Ã¤ÆÃ:" + userName + ":" + chatField.getText());
+						out.println("ì±„íŒ…:" + userName + ":" + chatField.getText());
 					else
-						JOptionPane.showMessageDialog(window, "³×Æ®¿öÅ© ¿¬°á ½ÇÆĞ", "°æ°í",
+						JOptionPane.showMessageDialog(window, "ë„¤íŠ¸ì›Œí¬ ì—°ê²° ì‹¤íŒ¨", "ê²½ê³ ",
 								JOptionPane.ERROR_MESSAGE);
-					logArea.append(Tools.getTime() + "\n\t" + userName + " ´ÔÀÇ ´ëÈ­: "
+					logArea.append(Tools.getTime() + "\n\t" + userName + " ë‹˜ì˜ ëŒ€í™”: "
 							+ chatField.getText() + "\n");
 					chatField.setText("");
 				}
@@ -177,7 +183,7 @@ public class PuzzleGUI extends JFrame {
 		do {
 			setUser();
 			if (userName == null)
-				JOptionPane.showMessageDialog(window, "ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä!", "°æ°í",
+				JOptionPane.showMessageDialog(window, "ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”!", "ê²½ê³ ",
 						JOptionPane.ERROR_MESSAGE);
 		} while (userName == null);
 	}
@@ -193,7 +199,7 @@ public class PuzzleGUI extends JFrame {
 		pane.setPreferredSize(new Dimension(160, 200));
 		list.setLayoutOrientation(JList.VERTICAL);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		int option = JOptionPane.showOptionDialog(window, pane, "½ÊÀÚ¸»Ç®ÀÌ ¼±ÅÃ",
+		int option = JOptionPane.showOptionDialog(window, pane, "ì‹­ìë§í’€ì´ ì„ íƒ",
 				JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
 		if (option == JOptionPane.OK_OPTION)
 			return (Crossword) list.getSelectedValue();
@@ -204,12 +210,12 @@ public class PuzzleGUI extends JFrame {
 
 	private void setUser() {
 		JOptionPane pane = new JOptionPane();
-		pane.showMessageDialog(null, "<°ÔÀÓ ¼³¸í>"+"\n"+"\n0.  ÀÌ¸§ ÀÔ·ÂÇÏ±â."+"\n1. <³×Æ®¿öÅ©¼³Á¤> (1) IP º¯°æ ¼±ÅÃ ÈÄ È®ÀÎ."+"\n2.  <¿É¼Ç> Á¤´äÃ¼Å© Å¬¸¯."+"\n3.  <±â´É> ½ÊÀÚ¸»Ç®ÀÌ ¼±ÅÃÇÏ±â Å¬¸¯ ½Ã ³­ÀÌµµ Á¶Àı °¡´É."
-		+"\n4.  <±â´É> ½ÊÀÚ¸»Ç®ÀÌ ÃÊ±âÈ­ Áö±İ±îÁö ÀûÀº ´Ü¾î ÃÊ±âÈ­."+"\n5.  ÇÏ¾á»ö Ä­¿¡ ÈùÆ®¿¡ ÇØ´çÇÏ´Â ´Ü¾îÀÇ ³¹¸»À» ¼ø¼­´ë·Î Àû±â.");
-		String option = JOptionPane.showInputDialog(window, "ÀÌ¸§: ", "ÀÔ·Â", JOptionPane.PLAIN_MESSAGE);
+		pane.showMessageDialog(null, "<ê²Œì„ ì„¤ëª…>"+"\n"+"\n0.  ì´ë¦„ ì…ë ¥í•˜ê¸°."+"\n1. <ë„¤íŠ¸ì›Œí¬ì„¤ì •> (1) IP ë³€ê²½ ì„ íƒ í›„ í™•ì¸."+"\n2.  <ì˜µì…˜> ì •ë‹µì²´í¬ í´ë¦­."+"\n3.  <ê¸°ëŠ¥> ì‹­ìë§í’€ì´ ì„ íƒí•˜ê¸° í´ë¦­ ì‹œ ë‚œì´ë„ ì¡°ì ˆ ê°€ëŠ¥."
+		+"\n4.  <ê¸°ëŠ¥> ì‹­ìë§í’€ì´ ì´ˆê¸°í™” ì§€ê¸ˆê¹Œì§€ ì ì€ ë‹¨ì–´ ì´ˆê¸°í™”."+"\n5.  í•˜ì–€ìƒ‰ ì¹¸ì— íŒíŠ¸ì— í•´ë‹¹í•˜ëŠ” ë‹¨ì–´ì˜ ë‚±ë§ì„ ìˆœì„œëŒ€ë¡œ ì ê¸°.");
+		String option = JOptionPane.showInputDialog(window, "ì´ë¦„: ", "ì…ë ¥", JOptionPane.PLAIN_MESSAGE);
 		if (option != null && !option.equals("")) {
 			userName = option;
-			logArea.append(Tools.getTime() + "\n\tÇöÀç »ç¿ëÀÚ: " + userName + "\n");
+			logArea.append(Tools.getTime() + "\n\tí˜„ì¬ ì‚¬ìš©ì: " + userName + "\n");
 		}
 	}
 
@@ -302,19 +308,19 @@ public class PuzzleGUI extends JFrame {
 	private JMenuBar createMenuBar() {
 		JMenuBar menuBar = new JMenuBar();
 
-		JMenu fileMenu = new JMenu("±â´É");
+		JMenu fileMenu = new JMenu("ê¸°ëŠ¥");
 
-		//½ÊÀÚ¸»Ç®ÀÌ °ÔÀÓ Á¶ÀÛ¹ı ¼³¸í
+		//ì‹­ìë§í’€ì´ ê²Œì„ ì¡°ì‘ë²• ì„¤ëª…
 		JMenuItem information = new JMenuItem();
-		information.setAction(new AbstractAction("½ÊÀÚ¸»Ç®ÀÌ °ÔÀÓ Á¶ÀÛ¹ı ¼³¸í") {
+		information.setAction(new AbstractAction("ì‹­ìë§í’€ì´ ê²Œì„ ì¡°ì‘ë²• ì„¤ëª…") {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane pane = new JOptionPane();
-				pane.showMessageDialog(null, "<°ÔÀÓ ¼³¸í>"+"\n"+"\n1.  <³×Æ®¿öÅ©¼³Á¤> (1) IP º¯°æ ¼±ÅÃ ÈÄ È®ÀÎ."+"\n2.  <¿É¼Ç> Á¤´äÃ¼Å© Å¬¸¯."+"\n3.  <±â´É> ½ÊÀÚ¸»Ç®ÀÌ ¼±ÅÃÇÏ±â Å¬¸¯ ½Ã ³­ÀÌµµ Á¶Àı °¡´É."
-				+"\n4.  <±â´É> ½ÊÀÚ¸»Ç®ÀÌ ÃÊ±âÈ­ Áö±İ±îÁö ÀûÀº ´Ü¾î ÃÊ±âÈ­."+"\n5.  ÇÏ¾á»ö Ä­¿¡ ÈùÆ®¿¡ ÇØ´çÇÏ´Â ´Ü¾îÀÇ ³¹¸»À» ¼ø¼­´ë·Î Àû±â.");
+				pane.showMessageDialog(null, "<ê²Œì„ ì„¤ëª…>"+"\n"+"\n1.  <ë„¤íŠ¸ì›Œí¬ì„¤ì •> (1) IP ë³€ê²½ ì„ íƒ í›„ í™•ì¸."+"\n2.  <ì˜µì…˜> ì •ë‹µì²´í¬ í´ë¦­."+"\n3.  <ê¸°ëŠ¥> ì‹­ìë§í’€ì´ ì„ íƒí•˜ê¸° í´ë¦­ ì‹œ ë‚œì´ë„ ì¡°ì ˆ ê°€ëŠ¥."
+				+"\n4.  <ê¸°ëŠ¥> ì‹­ìë§í’€ì´ ì´ˆê¸°í™” ì§€ê¸ˆê¹Œì§€ ì ì€ ë‹¨ì–´ ì´ˆê¸°í™”."+"\n5.  í•˜ì–€ìƒ‰ ì¹¸ì— íŒíŠ¸ì— í•´ë‹¹í•˜ëŠ” ë‹¨ì–´ì˜ ë‚±ë§ì„ ìˆœì„œëŒ€ë¡œ ì ê¸°.");
 				//Frame f= new JFrame();
-		        //f.setTitle("µµ¿ò¸»");
+		        //f.setTitle("ë„ì›€ë§");
 		        //f.setBounds(100, 100, 300, 300);
 		        //f.setVisible(true);			
 			}
@@ -324,7 +330,7 @@ public class PuzzleGUI extends JFrame {
 		fileMenu.add(information);
 		
 		JMenuItem resetCrossword = new JMenuItem();
-		resetCrossword.setAction(new AbstractAction("½ÊÀÚ¸»Ç®ÀÌ ÃÊ±âÈ­") {
+		resetCrossword.setAction(new AbstractAction("ì‹­ìë§í’€ì´ ì´ˆê¸°í™”") {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -344,7 +350,7 @@ public class PuzzleGUI extends JFrame {
 		fileMenu.add(resetCrossword);
 
 		JMenuItem loadCrossword = new JMenuItem();
-		loadCrossword.setAction(new AbstractAction("½ÊÀÚ¸»Ç®ÀÌ ¼±ÅÃÇÏ±â") {
+		loadCrossword.setAction(new AbstractAction("ì‹­ìë§í’€ì´ ì„ íƒí•˜ê¸°") {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -360,7 +366,7 @@ public class PuzzleGUI extends JFrame {
 		fileMenu.addSeparator();
 
 		JMenuItem closeWindow = new JMenuItem();
-		closeWindow.setAction(new AbstractAction("³¡³»±â") {
+		closeWindow.setAction(new AbstractAction("ëë‚´ê¸°") {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -374,10 +380,10 @@ public class PuzzleGUI extends JFrame {
 
 		menuBar.add(fileMenu);
 
-		JMenu optionsMenu = new JMenu("¿É¼Ç");
+		JMenu optionsMenu = new JMenu("ì˜µì…˜");
 
 		JMenuItem setUser = new JMenuItem();
-		setUser.setAction(new AbstractAction("»ç¿ëÀÚ º¯°æ") {
+		setUser.setAction(new AbstractAction("ì‚¬ìš©ì ë³€ê²½") {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -389,7 +395,7 @@ public class PuzzleGUI extends JFrame {
 		optionsMenu.add(setUser);
 
 		JCheckBoxMenuItem toggleSolvedSupport = new JCheckBoxMenuItem();
-		toggleSolvedSupport.setAction(new AbstractAction("Á¤´ä Ã¼Å©") {
+		toggleSolvedSupport.setAction(new AbstractAction("ì •ë‹µ ì²´í¬") {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -404,10 +410,10 @@ public class PuzzleGUI extends JFrame {
 
 		menuBar.add(optionsMenu);
 
-		JMenu networkingMenu = new JMenu("³×Æ®¿öÅ© ¼³Á¤");
+		JMenu networkingMenu = new JMenu("ë„¤íŠ¸ì›Œí¬ ì„¤ì •");
 
 		final JMenuItem connect = new JMenuItem();
-		connect.setAction(new AbstractAction("¿¬°á ¿©ºÎ") {
+		connect.setAction(new AbstractAction("ì—°ê²° ì—¬ë¶€") {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -420,7 +426,7 @@ public class PuzzleGUI extends JFrame {
 						System.err.println("Couldn't get I/O for the connection to"
 								+ socket.getInetAddress());
 					}
-					connect.setText("¿¬°á ¿©ºÎ");
+					connect.setText("ì—°ê²° ì—¬ë¶€");
 					connected = false;
 				} else { 
 					try {
@@ -433,12 +439,12 @@ public class PuzzleGUI extends JFrame {
 						connect.setText("disconnect");
 					} catch (UnknownHostException ex) {
 						JOptionPane.showMessageDialog(window,
-								"ÇöÀç È£½ºÆ® ¼­¹ö¿¡ ¾×¼¼½ºÇÒ ¼ö ¾ø½À´Ï´Ù. \n"
-										+ "»õ È£½ºÆ® ¼­¹ö¿¡ ¼³Á¤À» ½ÃµµÇØÁÖ½Ã±æ ¹Ù¶ø´Ï´Ù.", "°æ°í",
+								"í˜„ì¬ í˜¸ìŠ¤íŠ¸ ì„œë²„ì— ì•¡ì„¸ìŠ¤í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤. \n"
+										+ "ìƒˆ í˜¸ìŠ¤íŠ¸ ì„œë²„ì— ì„¤ì •ì„ ì‹œë„í•´ì£¼ì‹œê¸¸ ë°”ëë‹ˆë‹¤.", "ê²½ê³ ",
 								JOptionPane.ERROR_MESSAGE);
 					} catch (IOException ex) {
-						JOptionPane.showMessageDialog(window, "³×Æ®¿öÅ© ¿¬°á ½ÇÆĞ",
-								"°æ°í", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(window, "ë„¤íŠ¸ì›Œí¬ ì—°ê²° ì‹¤íŒ¨",
+								"ê²½ê³ ", JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			}
@@ -446,7 +452,7 @@ public class PuzzleGUI extends JFrame {
 		networkingMenu.add(connect);
 
 		JMenuItem changeHost = new JMenuItem();
-		changeHost.setAction(new AbstractAction("(1) IP º¯°æ") {
+		changeHost.setAction(new AbstractAction("(1) IP ë³€ê²½") {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -456,28 +462,28 @@ public class PuzzleGUI extends JFrame {
 						out.close();
 						in.close();
 					} catch (IOException ex) {
-						JOptionPane.showMessageDialog(window, "½ÊÀÚ¸»Ç®ÀÌ ¼­¹ö¸¦ ½ÇÇà ÇØÁÖ¼¼¿ä!", "°æ°í",
+						JOptionPane.showMessageDialog(window, "ì‹­ìë§í’€ì´ ì„œë²„ë¥¼ ì‹¤í–‰ í•´ì£¼ì„¸ìš”!", "ê²½ê³ ",
 								JOptionPane.ERROR_MESSAGE);
 					}
-					connect.setText("¿¬°á ¿©ºÎ");
+					connect.setText("ì—°ê²° ì—¬ë¶€");
 					connected = false;
 				}
 				try {
-					String host = JOptionPane.showInputDialog(window, "IP ÁÖ¼Ò ÀÔ·Â:",
-							"IP º¯°æ", JOptionPane.PLAIN_MESSAGE);
+					String host = JOptionPane.showInputDialog(window, "IP ì£¼ì†Œ ì…ë ¥:",
+							"IP ë³€ê²½", JOptionPane.PLAIN_MESSAGE);
 					socket = new Socket(host, 1292);
 					out = new PrintWriter(socket.getOutputStream(), true);
 					in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 					connected = true;
 					input = new Thread(new InStream());
 					input.start();
-					connect.setText("(2) ¿¬°á ÇØÁ¦");
+					connect.setText("(2) ì—°ê²° í•´ì œ");
 				} catch (UnknownHostException ex) {
-					JOptionPane.showMessageDialog(window, "ÇöÀç È£½ºÆ® ¼­¹ö¿¡ ¾×¼¼½ºÇÒ ¼ö ¾ø½À´Ï´Ù. \n"
-							+ "»õ È£½ºÆ® ¼­¹ö¿¡ ¼³Á¤À» ½ÃµµÇØÁÖ½Ã±æ ¹Ù¶ø´Ï´Ù.", "°æ°í",
+					JOptionPane.showMessageDialog(window, "í˜„ì¬ í˜¸ìŠ¤íŠ¸ ì„œë²„ì— ì•¡ì„¸ìŠ¤í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤. \n"
+							+ "ìƒˆ í˜¸ìŠ¤íŠ¸ ì„œë²„ì— ì„¤ì •ì„ ì‹œë„í•´ì£¼ì‹œê¸¸ ë°”ëë‹ˆë‹¤.", "ê²½ê³ ",
 							JOptionPane.ERROR_MESSAGE);
 				} catch (IOException ex) {
-					JOptionPane.showMessageDialog(window, "IP ÁÖ¼Ò¸¦ ´Ù½Ã ÀÔ·Â ÇØÁÖ¼¼¿ä!", "°æ°í",
+					JOptionPane.showMessageDialog(window, "IP ì£¼ì†Œë¥¼ ë‹¤ì‹œ ì…ë ¥ í•´ì£¼ì„¸ìš”!", "ê²½ê³ ",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			}
@@ -508,7 +514,7 @@ public class PuzzleGUI extends JFrame {
 					
 						}
 					} else { 
-						logArea.append(Tools.getTime() + "\n\t" + vals[1] + " ´ÔÀÇ ´ëÈ­: " + vals[2]
+						logArea.append(Tools.getTime() + "\n\t" + vals[1] + " ë‹˜ì˜ ëŒ€í™”: " + vals[2]
 								+ "\n");
 					}
 				}
